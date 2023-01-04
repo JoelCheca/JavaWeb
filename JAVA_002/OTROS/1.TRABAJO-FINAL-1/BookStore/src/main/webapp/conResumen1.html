@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CONSULTA RESUMEN 1</title>
+</head>
+<body>
+
+	<br>
+	<div class="row">
+		<div class="col-sm-12 ">
+			<div class="section-title text-center">
+				<h2 class="navegacion">TIPO PUBLICACIÓN</h2>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="card" id="divFormulario">
+		<div class="card-header">Datos de la consulta</div>
+		<div class="card-body">
+			<form id="formDatos">
+				<div class="form-group row">
+					<label for="descripcion" class="col-sm-2 col-form-label">INGRESA
+						TIPO PUBLICACIÓN:</label>
+
+					<div class="col-sm-10">
+						<select class="custom-select" id="descripcion" name="descripcion">
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-4 offset-4">
+					<button id="btnConsultar" type="button"
+						class="btn btn-primary btn-lg btn-block">Consultar</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<div class="card" style="display: none;" id="divReporte">
+		<div class="card-header" id="reporteTitulo">Reporte ...</div>
+		<div class="card-body">
+			<div>
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th>ID PUBLICACION</th>
+							<th>TITULO</th>
+							<th>AUTOR</th>
+							<th>PRECIO</th>
+							<th>NRO. EDICION</th>
+							<th>STOCK</th>
+						</tr>
+					</thead>
+					<tbody id="reporteDetalle">
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<div class="col-sm-4 offset-4">
+					<button id="btnFormulario" type="button"
+						class="btn btn-primary btn-lg btn-block">Retornar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+		
+		$(function() {
+			cargarCombos();
+			$("#btnConsultar").click(fnBtnConsultar);
+			$("#btnFormulario").click(fnBtnFormulario);
+		});
+
+		function cargarCombos() {
+			let url = "traerCombos2";
+			var $select = $('#descripcion')
+			$select.append('<option value=>--SELECCIONAR--</option>');
+			$.post(url, function(lista) {
+				$.each(lista, function(index, obj) {
+					$select.append('<option value='+obj.DESCRIPCION+'>'
+							+ obj.DESCRIPCION + '</option>');
+
+				});
+
+			});
+		}
+
+		function fnBtnConsultar() {
+			let combo = document.getElementById("descripcion");
+			let descripcion = combo.options[combo.selectedIndex].text;
+			let data = "descripcion=" + descripcion;
+
+			let url = "ConResumen1";
+			$.post(url, data, function(lista) {
+				let reporteData = "";
+				$.each(lista, function(index, obj) {
+					reporteData += "<tr>";
+					reporteData += "<td>" + obj.IDPUBLICACION + "</td>";
+					reporteData += "<td>" + obj.TITULO + "</td>";
+					reporteData += "<td>" + obj.AUTOR + "</td>";
+					reporteData += "<td>" + obj.PRECIO + "</td>";
+					reporteData += "<td>" + obj.NROEDICION + "</td>";
+					reporteData += "<td>" + obj.STOCK + "</td>";
+					reporteData += "</tr>";
+				});
+				$("#reporteTitulo").html(
+						"REPORTE  DE  " + descripcion + " REGISTRADOS");
+				$("#reporteDetalle").html(reporteData);
+				$("#divFormulario").hide();
+				$("#divReporte").show();
+			});
+		}
+
+		function fnBtnFormulario() {
+			$("#divFormulario").show();
+			$("#divReporte").hide();
+		}
+	</script>
+
+</body>
+</html>

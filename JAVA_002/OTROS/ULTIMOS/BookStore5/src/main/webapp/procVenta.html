@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CONSULTA RESUMEN 1</title>
+</head>
+<body>
+
+	<br>
+	<div class="row">
+		<div class="col-sm-12 ">
+			<div class="section-title text-center">
+				<h2 class="navegacion">REGISTRAR VENTA</h2>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="card" id="divFormulario">
+		<div class="card-header">Datos del proceso</div>
+		<div class="card-body">
+			<form id="formDatos" method="post">
+
+
+
+
+				<div class="form-group row">
+					<label for="cliente" class="col-sm-2 col-form-label">Cliente</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="cliente" name="cliente" placeholder="Excelentísimo Cliente">
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label for="descripcion" class="col-sm-2 col-form-label">
+						TIPO PUBLICACIÓN:</label>
+
+					<div class="col-sm-10">
+						<select class="custom-select" id="descripcion" name="descripcion">
+
+						</select>
+
+
+					</div>
+
+				</div>
+
+
+
+				<div class="form-group row">
+					<label for="idpublicacion" class="col-sm-2 col-form-label">Publicación</label>
+
+					<div class="col-sm-10">
+						<select class="custom-select" id="idpublicacion" name="idpublicacion">
+
+						</select>
+
+					</div>
+
+				</div>
+
+
+
+
+
+				<div class="form-group row">
+					<label for="precio" class="col-sm-2 col-form-label">Valor:</label>
+						<div class="col-sm-10" id="precio">0.0</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="form-group row">
+					<label for="cantidad" class="col-sm-2 col-form-label">Cantidades</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="cantidad" name="cantidad"
+							placeholder="Cantidad de Libros">
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				<div class="form-group row">
+					<div class="col-sm-10 offset-sm-2">
+						<button type="button" class="btn btn-primary" id="btnProcesarVenta">Procesar Venta</button>				
+					</div>			
+				</div>
+				
+				
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	
+
+	<div class="card" style="display: none;" id="divReporte">
+		<div class="card-header" id="reporteTitulo">Reporte ...</div>
+		<div class="card-body">
+			<div>
+				<div class="form-group row">
+					<label for="moneda" class="col-sm-2 col-form-label">Estado</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="estado" name="estado"
+							placeholder="Moneda de la cuenta" disabled="disabled">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="moneda" class="col-sm-2 col-form-label">Mensaje</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="mensaje" name="mensaje"
+							placeholder="Moneda de la cuenta" disabled="disabled">
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="col-sm-4 offset-4">
+					<button id="btnFormulario" type="button"
+						class="btn btn-primary btn-lg btn-block">Retornar</button>
+						
+						
+						
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+		<div class="card" id="divReporte1"  style="display: none;">
+		<div class="card-header" id="reporteTitulo1">ÚLTIMAS 10 VENTAS</div>
+		<div class="card-body">
+			<div>
+				<table class="table">
+					<thead class="thead-light">
+						<tr>							
+							<th>CLIENTE</th>
+							<th>FECHA</th>						
+							<th>ID PUBLICACION</th>
+							
+							<th>CANTIDAD</th>					
+							<th>PRECIO</th>
+							<th>DCTO</th>
+							
+							
+							<th>SUBTOTAL</th>					
+							<th>IMPUESTO</th>
+							<th>TOTAL</th>
+						</tr>
+					</thead>
+					<tbody id="reporteDetalle">
+						<tr>
+							
+						</tr>
+					</tbody>
+				</table>
+		
+			</div>
+		
+		</div>
+	</div>
+	
+
+
+	<script type="text/javascript">
+		$(function() {			
+            cargarCombos() ;           
+			$("#btnProcesarVenta").click(fnBtnProcesarVenta);
+			$("#btnFormulario").click(fnBtnFormulario);
+			$("#descripcion").change(cargarCombos1);
+			$("#idpublicacion").change(fnBtnTraerPrecio);
+			
+		});
+
+		
+		
+		
+	
+		function cargarCombos() {			
+			let url = "traerCombos2";
+			var $select=$('#descripcion')
+			 $select.append('<option value=>--  PRIMERO SELECCIONAR TIPO PUBLICACION--</option>'  );
+			$.post(url, function(lista) {
+				  $.each(lista,function(index,obj){
+					  $select.append('<option value='+obj.DESCRIPCION+'>'+obj.DESCRIPCION+'</option>'  );	
+					
+				  });			
+				
+			});
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		function cargarCombos1() {	
+			let descripcion = $("#descripcion").val();
+			let url = "traerCombos3";			
+			let data = "descripcion=" + descripcion;	
+			var $select=$('#idpublicacion')	
+			$select.append('<option value=>--SELECCIONAR--</option>'  );
+				$.post(url, data, function(lista) {
+					$.each(lista, function(index, obj) {
+					console.log(lista);
+					  $select.append('<option value='+obj.IDPUBLICACION+'>'+obj.IDPUBLICACION+" - "+obj.TITULO+'</option>'  );
+					});
+				});
+		}
+
+		
+		
+		
+		
+		function fnBtnTraerPrecio() {
+			
+			let idpublicacion = $("#idpublicacion").val();
+			let url = "traerPrecio";			
+			let data = "idpublicacion=" + idpublicacion;			
+				$.post(url, data, function(lista) {
+					$.each(lista, function(index, obj) {
+					console.log(lista);
+					$("#precio").html(" S/. "+obj.PRECIO +" .00");
+					});
+				});
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		function llenarCombo(control, arreglo) {
+			control = "#" + control;
+			$(control).empty();
+			$(arreglo).each(function() {
+				let option = $(document.createElement('option'));
+				option.text(this.nombre);
+				option.val(this.id);
+				$(control).append(option);
+			});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		function fnBtnProcesarVenta() {
+			
+			let combo = document.getElementById("idpublicacion");
+			let idpublicacion = combo.options[combo.selectedIndex].text;
+			/*let data = "idpublicacion=" + idpublicacion;*/
+			let cliente = $("#cliente").val();
+			let cantidad = $("#cantidad").val();			
+			let data = {"cliente" : cliente + "" , "idpublicacion":
+		    idpublicacion +"" , "cantidad": cantidad +""} ;			
+			let url = "postProcesarVenta";
+			$.post(url, data, function(objeto) {
+				$("#estado").val(objeto.estado);
+				$("#mensaje").val(objeto.mensaje);
+				$("#divFormulario").hide();
+				$("#divReporte").show();
+				
+				
+				
+			});
+		}
+
+		
+
+		
+		
+		
+			function fnBtnFormulario() {
+				$("#divWork").load("procVenta.html");
+				let data = {} ;			
+				let url = "ultimasVentas";
+				
+				$.post(url, data, function(lista) {
+					let reporteData = "";
+					$.each(lista, function(index, obj) {
+						reporteData += "<tr>";
+									
+						reporteData += "<td>" + obj.CLIENTE + "</td>";
+						reporteData += "<td>" + obj.FECHA + "</td>";
+						reporteData += "<td>" + obj.IDPUBLICACION + "</td>";
+						reporteData += "<td>" + obj.CANTIDAD + "</td>";
+						reporteData += "<td>" + obj.PRECIO + "</td>";
+						reporteData += "<td>" + obj.DCTO + "</td>";
+						
+						reporteData += "<td>" + obj.SUBTOTAL + "</td>";
+						reporteData += "<td>" + obj.IMPUESTO + "</td>";
+						reporteData += "<td>" + obj.TOTAL + "</td>";
+						reporteData += "</tr>";
+					});
+					$("#reporteTitulo").html();
+					$("#reporteDetalle").html(reporteData);
+					$("#divReporte1").show();
+					
+				});
+			}
+		
+		
+		
+		
+			
+
+			function fnBtnTraerPrecio() {
+				let idpublicacion = $("#idpublicacion").val();
+				let url = "traerPrecio";			
+				let data = "idpublicacion=" + idpublicacion;	
+				
+					$.post(url, data, function(lista) {
+						$.each(lista, function(index, obj) {
+						console.log(lista);
+						$("#precio").html(" S/. "+obj.PRECIO +" .00");
+						});
+					});
+			
+			}
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+
+		
+
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

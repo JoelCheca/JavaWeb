@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+	crossorigin="anonymous">	
+    <link href="fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet">
+    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" id="Montserrat-css"
+        href="https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%7CRaleway%3A300%2C400%2C500%2C600%2C700%2C800%2C900&amp;
+        subset=latin-ext&amp;ver=4.7.24"
+        type="text/css" media="all">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> 
+  <link rel="stylesheet" href="css/styles.css">	 
+   <link rel="stylesheet" href="css/styles1.css">	 
+
+	
+<title>BOOK STORE</title>
+</head>
+<body>
+
+	<nav id="nav" class="navbar navbar-expand-lg  sticky-top ">
+		<div class="container">
+			<div class="col-lg">
+				<div class="logo">
+					<i class="bi bi-journals"></i> <a href="main.html">BOOKSTORE</a>
+				</div>
+			</div>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul id="menu-main" class="navbar-nav me-auto mb-2 mb-lg-0">
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Consultas </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="javascript:fnCargarResumen1();">
+								TIPO PUBLICACION</a> <a class="dropdown-item"
+								href="javascript:fnCargarResumen2();"> FECHA PUBLICACION</a>
+						</div>
+						</li>
+												
+						<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Administración </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="javascript:fnProcesoVenta();">
+								REGISTRAR VENTA</a> <a class="dropdown-item"
+								href="javascript: fnModificarPrecio();"> MODIFICAR PRECIO</a>
+								</div>
+		            	</li>
+						
+						<li ><a
+						class="nav-link " href="index.html" id="navbarDropdown"
+						role="button"   href="index.html">Cerrar Sesion </a>
+						
+						</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<div id="divWork">
+			<div class="carousel-inner" id="btn">
+				<div class="carousel-item active" data-bs-interval="4000">
+					<img src="img/banner2.jpg" class="d-block w-100" alt="...">
+					<div id="e" class="carousel-caption d-none d-md-block">
+						<h2>BOOK STORE</h2>
+						<p>Los mejores libros, los mejores precios</p>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<footer id="main-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<div class=" i">
+						<img id="img-logo" src="img/brazas y lena.png" alt="">
+					</div>
+
+					<div class="footer-text ">
+						<p>
+							©copyright Todos los derechos reservados<br>Desarrollado por<i
+								class="fa fa-heart"></i> <span>2022 WEB PDAX5</span>
+						</p>
+						<div class="footer-social-link">
+							<ul>
+								<li><a href="https://es-la.facebook.com/" target="_blank">
+										<i class="bi bi-facebook"></i>
+								</a></li>
+								<li><a href="https://twitter.com/?lang=es" target="_blank">
+										<i class="bi bi-twitter"></i>
+								</a></li>
+								<li><a href=""><i class="bi bi-tiktok"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			// Hola
+			//Console.log("");
+		});
+
+		function fnCargarResumen1() {
+			$("#divWork").load("conResumen1.html");
+		}
+		
+		function fnCargarResumen2() {
+			$("#divWork").load("conResumen2.html");
+		}
+		
+		function fnProcesoVenta(){
+			$("#divWork").load("procVenta.html");
+			
+		}
+				
+		
+		
+		function fnModificarPrecio(){
+			$("#divWork").load("modificarPrecio.html");
+			let data = {} ;			
+			let url = "listarPublicaciones";
+			
+			$.post(url, data, function(lista) {
+				let reporteData = "";
+				$.each(lista, function(index, obj) {
+					reporteData += "<tr>";
+					reporteData += "<td>" + obj.IDPUBLICACION + "</td>";	
+					reporteData += "<td>" + obj.AUTOR + "</td>";
+					reporteData += "<td>" + obj.TITULO + "</td>";
+					reporteData += "<td>" + obj.PRECIO + "</td>";	
+					reporteData += "</tr>";
+				});
+				$("#reporteTitulo").html();
+				$("#reporteDetalle").html(reporteData);
+				
+			});
+		}
+
+	</script>
+</body>
+</html>

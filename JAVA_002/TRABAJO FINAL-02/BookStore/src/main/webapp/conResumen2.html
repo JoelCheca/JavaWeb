@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CONSULTA RESUMEN 2</title>
+ 	 
+</head>
+<body>
+
+	<br>
+	<div class="row">
+		<div class="col-sm-12 ">
+			<div class="section-title text-center">
+				<h2 class="navegacion">VENTA POR FECHAS</h2>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="card" id="divFormulario">
+		<div class="card-header">Datos de la consulta</div>
+		<div class="card-body">
+			<form id="formDatos">
+				<div class="form-group row">
+					<div class="col-sm-3 input-group-lg"></div>
+
+					<div class="col-sm-3 input-group-lg">
+						<label for="dias" class="col-form-label">DESDE:</label> <input
+							type="date" name="fecha1" id="fecha1" />
+					</div>
+
+					<div class="col-sm-3 input-group-lg">
+						<label for="dias" class="col-form-label">HASTA:</label> <input
+							type="date" name="fecha2" id="fecha2" />
+					</div>
+
+				</div>
+
+				<div class="col-sm-4 offset-4">
+					<button id="btnConsultar" type="button"
+						class="btn btn-primary btn-lg btn-block">Consultar</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<div class="card" style="display: none;" id="divReporte">
+		<div class="card-header" id="reporteTitulo">Reporte ...</div>
+		<div class="card-body">
+			<div>
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th>CÓDIGO</th>
+							<th>CLIENTE</th>
+							<th>FECHA</th>							
+							<th>CANTIDAD</th>
+							<th>PRECIO</th>
+							<th>DCTO</th>
+							<th>SUBTOTAL</th>
+							<th>IMPUESTO</th>						
+							<th>TOTAL</th>
+							
+						</tr>
+					</thead>
+					<tbody id="reporteDetalle">
+						<tr>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<div class="col-sm-4 offset-4">
+					<button id="btnFormulario" type="button"
+						class="btn btn-primary btn-lg btn-block">Retornar</button>
+				</div>
+			</div>
+		</div>
+	</div>		
+
+
+	<script type="text/javascript">
+	
+
+		$(function() {
+			$("#btnConsultar").click(fnBtnConsultar);
+			$("#btnFormulario").click(fnBtnFormulario);
+		});
+		
+		function fnBtnConsultar() {				
+			
+			let fecha1 = $("#fecha1").val();
+			let fecha2 = $("#fecha2").val();
+			console.log(fecha1);
+			let data = {"fecha1" : fecha1 + "" , "fecha2": fecha2+""} ;			
+			let url = "ConResumen2";
+			
+			$.post(url, data, function(lista) {
+				let reporteData = "";
+				$.each(lista, function(index, obj) {
+					reporteData += "<tr>";
+					reporteData += "<td>" + obj.IDVENTA + "</td>";
+					reporteData += "<td>" + obj.CLIENTE + "</td>";					
+					reporteData += "<td>" + obj.FECHA + "</td>";				
+					reporteData += "<td>" + obj.CANTIDAD + "</td>";
+					reporteData += "<td>" + obj.PRECIO + "</td>";
+					reporteData += "<td>" + obj.DCTO + "</td>";
+					reporteData += "<td>" + obj.SUBTOTAL + "</td>";
+					reporteData += "<td>" + obj.IMPUESTO + "</td>";
+					reporteData += "<td>" + obj.TOTAL + "</td>";
+					reporteData += "</tr>";
+				});
+				$("#reporteTitulo").html("Consultar  de  ventas del  " + fecha1 + " al " + fecha2);
+				$("#reporteDetalle").html(reporteData);
+				$("#divFormulario").hide();
+				$("#divReporte").show();
+			});
+		}
+
+		function fnBtnFormulario() {
+			$("#divFormulario").show();
+			$("#divReporte").hide();
+		}
+	</script>
+</body>
+</html>

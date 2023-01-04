@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CONSULTA RESUMEN 1</title>
+</head>
+<body>
+
+	<h1>REGISTRAR VENTA</h1>
+
+	<div class="card" id="divFormulario">
+		<div class="card-header">Datos del proceso</div>
+		<div class="card-body">
+			<form id="formDatos">
+				<div class="form-group row">
+					<label for="cliente" class="col-sm-2 col-form-label">Cliente</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="cliente" name="cliente"
+							placeholder="Excelentísimo Cliente">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="idpublicacion" class="col-sm-2 col-form-label">Id-Publicación</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="idpublicacion" name="idpublicacion"
+							placeholder="Codigo de publicación">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="cantidad" class="col-sm-2 col-form-label">Cantidades</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="cantidad" name="cantidad"
+							placeholder="Cantidad de Libros">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10 offset-sm-2">
+						<button type="button" class="btn btn-primary" id="btnProcesarVenta">Procesar Venta</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="card" style="display: none;" id="divReporte">
+		<div class="card-header" id="reporteTitulo">Reporte ...</div>
+		<div class="card-body">
+			<div>
+				<div class="form-group row">
+					<label for="moneda" class="col-sm-2 col-form-label">Estado</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="estado" name="estado"
+							placeholder="Moneda de la cuenta" disabled="disabled">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="moneda" class="col-sm-2 col-form-label">Mensaje</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="mensaje" name="mensaje"
+							placeholder="Moneda de la cuenta" disabled="disabled">
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="col-sm-4 offset-4">
+					<button id="btnFormulario" type="button"
+						class="btn btn-primary btn-lg btn-block">Retornar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#btnProcesarVenta").click(fnBtnProcesarVenta);
+			$("#btnFormulario").click(fnBtnFormulario);
+		});
+
+		function fnBtnProcesarVenta() {
+			let data = $("#formDatos").serialize();
+			let url = "postProcesarVenta";
+			$.post(url, data, function(objeto) {
+				$("#estado").val(objeto.estado);
+				$("#mensaje").val(objeto.mensaje);
+				$("#divFormulario").hide();
+				$("#divReporte").show();
+			});
+		}
+
+		function fnBtnFormulario() {
+			$("#divFormulario").show();
+			$("#divReporte").hide();
+		}
+	</script>
+</body>
+</html>

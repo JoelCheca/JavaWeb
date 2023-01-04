@@ -1,0 +1,186 @@
+@charset "ISO-8859-1";
+
+/* ----------------------------------------------------------------------------------------
+* BOOKSTORE  STYLES GENERALES 
+* ----------------------------------------------------------------------------------------
+*/
+
+a {
+    text-decoration: none;
+    -webkit-transition: .3s;
+    transition: .3s;
+    font-family: "Montserrat", sans-serif;
+    }
+
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+/*
+* ----------------------------------------------------------------------------------------
+* NAV CSS STYLE
+* ----------------------------------------------------------------------------------------
+*/
+nav i{
+	background: #FBBC05;
+    height: 30px;
+    width: 30px;
+    text-align: center;   
+    color: #fff;
+    line-height: 30px;
+    border-radius: 30px;
+    font-size: 30px;
+}
+
+
+.logo {
+    padding-top: 28px;
+    margin-left: 35px;  
+
+}
+
+.logo a {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 700;
+    color: #FBBC05;
+    letter-spacing: 3px;
+    font-size: 40px;
+}
+
+
+.sticky-top {
+    
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    background-color: #060606;
+}
+
+.nav-link{
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    /*padding: 30px 15px;*/
+     transition: .3s;
+    font-weight: 600;
+}
+
+
+
+/*
+* ----------------------------------------------------------------------------------------
+* FOOTER CSS STYLE
+* ----------------------------------------------------------------------------------------
+*/
+
+.footer-text p {
+    color: #fff;
+}
+
+.footer-text p span {
+    color: #FBBC05;
+}
+
+
+.footer-social-link ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.footer-social-link ul li {
+    display: inline-block;
+    margin: 0px 3px;
+}
+
+.footer-social-link ul li a {
+    background: #FBBC05;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    display: block;
+    color: #fff;
+    line-height: 30px;
+}
+
+.footer-social-link ul li a:hover {
+    border-radius: 50%;
+}
+
+
+.footer-top-area {
+    background: #F0F0F0;
+    padding:  70px;
+    
+}
+
+
+#main-footer {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    background-color: #000;
+}
+
+
+
+
+.main-footer{
+    background: #222;
+    color: white;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: .8em;}
+
+
+
+/*
+* ----------------------------------------------------------------------------------------
+* PUBLICACIONES CSS STYLE
+* ----------------------------------------------------------------------------------------
+*/
+
+
+
+.card-header:first-child {
+   
+    background:#FBBC05;
+}
+
+
+
+
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+
+
+
+
+.btn-primary{
+    background-color: #217677;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    --bs-btn-hover-bg:#F5CD07;
+    --bs-btn-active-bg: #217677;
+   
+    
+}
